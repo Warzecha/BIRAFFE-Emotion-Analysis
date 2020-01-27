@@ -6,7 +6,8 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 
 input_cols = ['ANGER', 'CONTEMPT', 'DISGUST', 'FEAR', 'HAPPINESS', 'NEUTRAL', 'SADNESS', 'SURPRISE', 'ValenceMean-IAPS',
-              'ArousalMean-IAPS', 'ValenceMean_IADS', 'ArousalMean_IADS']
+              'ArousalMean-IAPS', 'ValenceMean_IADS', 'ArousalMean_IADS', 'ANS-TIME', 'EMO-ANS', 'VALENCE-ANS',
+              'AROUSAL-ANS']
 output_cols = ['EXTRAVERSION']
 
 dataset = pd.read_csv("preprocessed/ALL-DATA.csv")
@@ -30,7 +31,7 @@ X_train, X_test, y_train, y_test = train_test_split(xscale, yscale)
 # print(np.isnan(X_train).any())
 
 model = keras.models.Sequential()
-model.add(Dense(8, input_shape=(12,)))
+model.add(Dense(8, input_shape=(16,)))
 model.add(Dropout(0.4))
 model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
