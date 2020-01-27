@@ -42,3 +42,5 @@ Dane uzyskane w badaniu Procedure:
 - arousal_ans - odpowiedź w przypadku *emospace*,
 
 ### Uzyskana korelacja
+
+![correlation](https://raw.githubusercontent.com/Warzecha/BIRAFFE-Emotion-Analysis/master/img/correlation.png)
