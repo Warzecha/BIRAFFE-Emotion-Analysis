@@ -21,7 +21,7 @@ scaler_x = preprocessing.MinMaxScaler()
 X_scale = scaler_x.fit_transform(x)
 
 
-kmeans = KMeans(n_clusters=2, random_state=0).fit(X_scale)
+kmeans = KMeans(n_clusters=5, random_state=0).fit(X_scale)
 
 y_kmeans = kmeans.predict(X_scale)
 
