@@ -3,3 +3,6 @@ preprocessed/
 BIRAFFE-*/
 BIRAFFE-*.csv
 .venv
+.idea
+.DS_Store
+.ipynb_checkpoints
