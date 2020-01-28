@@ -5,12 +5,18 @@ from keras.layers import Dense, Dropout
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 
-input_cols = ['ANGER', 'CONTEMPT', 'DISGUST', 'FEAR', 'HAPPINESS', 'NEUTRAL', 'SADNESS', 'SURPRISE', 'ValenceMean-IAPS',
-              'ArousalMean-IAPS', 'ValenceMean_IADS', 'ArousalMean_IADS', 'ANS-TIME', 'EMO-ANS', 'VALENCE-ANS',
-              'AROUSAL-ANS']
-output_cols = ['EXTRAVERSION']
+input_cols = [
+    # 'anger', 'contempt', 'disgust', 'fear', 'happiness', 'neutral', 'sadness', 'surprise',
+    # 'picture_arousal', 'sound_valence', 'sound_arousal', 'ans_time', 'emotion_ans',
+    'valence_ans',
+    'arousal_ans'
+]
+output_cols = ['picture_valence']
 
-dataset = pd.read_csv("preprocessed/ALL-DATA.csv")
+dataset = pd.read_csv("preprocessed/ALL-DATA-2.csv")
+
+dataset = dataset.where(dataset["emotion_ans"] == -1)
+dataset = dataset.dropna()
 
 print("Dataset isnull", dataset.isnull().any())
 
@@ -31,9 +37,9 @@ X_train, X_test, y_train, y_test = train_test_split(xscale, yscale)
 # print(np.isnan(X_train).any())
 
 model = keras.models.Sequential()
-model.add(Dense(8, input_shape=(16,)))
+model.add(Dense(2, input_shape=(2,)))
 model.add(Dropout(0.4))
 model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 
-model.fit(X_train, y_train, validation_data=(X_test, y_test), batch_size=100, epochs=50)
+model.fit(X_train, y_train, validation_data=(X_test, y_test), batch_size=200, epochs=100)
